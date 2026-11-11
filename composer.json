@@ -1,13 +1,12 @@
 {
-    "name": "blackfox/framework",
+    "name": "chrisdfr/framework",
     "description": "Le framework Blackfox",
     "keywords": ["blackfox", "framework"],
     "type": "framework",
     "require": {
-        "php": "^8.2",
         "twig/twig": "^3.14"
     },
-    "license": "MIT",
+    "license": "LGPL-2.1-or-later",
     "autoload": {
         "psr-4": {
             "Blackfox\\": "src/Blackfox/"
@@ -16,7 +15,7 @@
     "authors": [
         {
             "name": "Christophe Dufour",
-            "email": "blackfox@proximus.be"
+            "email": "chrisdfr@proximus.be"
         }
     ],
     "require-dev": {
