@@ -7,9 +7,9 @@
  * Gère les erreurs du frameword et les enregistre
  */
 
-namespace Blackfox\Handlers;
+namespace ChrisDfr\Framework\Handlers;
 
-use Blackfox\Application;
+use ChrisDfr\Framework\Application;
 
 class ErrorHandler extends AbstractErrorHandler
 {

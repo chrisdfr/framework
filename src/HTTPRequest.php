@@ -7,7 +7,7 @@
  * Classe modélidant une requête html
  */
 
-namespace Blackfox;
+namespace ChrisDfr\Framework;
 
 class HTTPRequest extends ApplicationComponent
 {

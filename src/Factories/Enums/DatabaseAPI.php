@@ -6,7 +6,7 @@
  * 
  * API disponible pour une conneion à une base de données
  */
-namespace Blackfox\Factories\Enums;
+namespace ChrisDfr\Framework\Factories\Enums;
 
 enum DatabaseAPI: string
 {

@@ -7,9 +7,9 @@
  * Classe de base pour toutes les entités.
  */
 
-namespace Blackfox\Entities;
+namespace ChrisDfr\Framework\Entities;
 
-use Blackfox\Entities\Traits\Hydrator;
+use ChrisDfr\Framework\Entities\Traits\Hydrator;
 
 abstract class Entity
 {

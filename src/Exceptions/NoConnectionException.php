@@ -7,9 +7,9 @@
  * Exception émise s'il n'y à pas de connexion avec une base de données
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class NoConnectionException extends BlackfoxException
+class NoConnectionException extends ChrisDfr\FrameworkException
 {
 
 }

@@ -7,10 +7,10 @@
  * Cette classe représentant un tableau avec des paramètres de configuration
  */
 
-namespace Blackfox\Config;
+namespace ChrisDfr\Framework\Config;
 
-use Blackfox\Application;
-use Blackfox\ApplicationComponent;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\ApplicationComponent;
 
 abstract class AbstractConfig extends ApplicationComponent
 {

@@ -7,9 +7,9 @@
  * Classe modélidant une réponce html
  */
 
-namespace Blackfox;
+namespace ChrisDfr\Framework;
 
-use Blackfox\View\View;
+use ChrisDfr\Framework\View\View;
 
 class HTTPResponse extends ApplicationComponent
 {

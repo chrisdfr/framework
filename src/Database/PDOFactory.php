@@ -7,9 +7,9 @@
  * Gére la connexion avec la base de données en utilisant PDO
  */
 
-namespace Blackfox\Database;
+namespace ChrisDfr\Framework\Database;
 
-use Blackfox\Database\Interfaces\CreateInstance;
+use ChrisDfr\Framework\Database\Interfaces\CreateInstance;
 
 class PDOFactory implements CreateInstance
 {

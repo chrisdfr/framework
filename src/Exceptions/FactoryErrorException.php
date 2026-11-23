@@ -7,9 +7,9 @@
  * Exception émise si une factory est inexistante
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class FactoryErrorException extends BlackfoxException
+class FactoryErrorException extends ChrisDfr\FrameworkException
 {
 
 }

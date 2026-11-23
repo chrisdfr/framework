@@ -7,9 +7,9 @@
  * Classe de base pour toutes les exceptions de Mamba
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class BlackfoxException extends \Exception
+class ChrisDfr\FrameworkException extends \Exception
 {
 
 }

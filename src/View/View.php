@@ -7,11 +7,11 @@
  * Controleur de base pour tous les controleurs d'une application.
  */
 
-namespace Blackfox\View;
+namespace ChrisDfr\Framework\View;
 
-use Blackfox\Application;
-use Blackfox\ApplicationComponent;
-use Blackfox\Config\Link;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\ApplicationComponent;
+use ChrisDfr\Framework\Config\Link;
 
 class View extends ApplicationComponent
 {

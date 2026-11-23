@@ -7,11 +7,11 @@
  * Classe de base pour les gestionnaires d'erreurs
  */
 
-namespace Blackfox\Handlers;
+namespace ChrisDfr\Framework\Handlers;
 
-use Blackfox\Application;
-use Blackfox\ApplicationComponent;
-use Blackfox\View\View;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\ApplicationComponent;
+use ChrisDfr\Framework\View\View;
 
 abstract class AbstractErrorHandler extends ApplicationComponent
 {

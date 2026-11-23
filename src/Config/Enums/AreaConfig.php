@@ -7,7 +7,7 @@
  * Catégorie du fichier de configuration
  */
 
-namespace Blackfox\Config\Enums;
+namespace ChrisDfr\Framework\Config\Enums;
 
 enum AreaConfig: string
 {

@@ -7,9 +7,9 @@
  * Exception émise si un paramètre de configuration est inexistant
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class BadConfigParamException extends BlackfoxException
+class BadConfigParamException extends ChrisDfr\FrameworkException
 {
 
 }

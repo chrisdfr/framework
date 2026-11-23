@@ -7,10 +7,10 @@
  * Classe modélidant un utilisateur
  */
 
-namespace Blackfox\User;
+namespace ChrisDfr\Framework\User;
 
-use Blackfox\Application;
-use Blackfox\ApplicationComponent;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\ApplicationComponent;
 
 class User extends ApplicationComponent
 {

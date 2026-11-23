@@ -7,7 +7,7 @@
  * Gére les événements de Composer
  */
 
-namespace Blackfox\Scripts;
+namespace ChrisDfr\Framework\Scripts;
 
 use Composer\Script\Event;
 

@@ -7,11 +7,11 @@
  * Crée le manageur demandé.
  */
 
-namespace Blackfox\Factories;
+namespace ChrisDfr\Framework\Factories;
 
-use Blackfox\Exceptions\FactoryErrorException;
-use Blackfox\Exceptions\NoConnectionException;
-use Blackfox\Factories\Enums\DatabaseAPI;
+use ChrisDfr\Framework\Exceptions\FactoryErrorException;
+use ChrisDfr\Framework\Exceptions\NoConnectionException;
+use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 
 class ModelFactory
 {

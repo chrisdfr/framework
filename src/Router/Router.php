@@ -7,9 +7,9 @@
  * Gére les différentes route de l'application
  */
 
-namespace Blackfox\Router;
+namespace ChrisDfr\Framework\Router;
 
-use Blackfox\Exceptions\InvalidRouteException;
+use ChrisDfr\Framework\Exceptions\InvalidRouteException;
 
 class Router
 {

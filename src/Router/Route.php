@@ -7,7 +7,7 @@
  * Classe modélisant une route
  */
 
-namespace Blackfox\Router;
+namespace ChrisDfr\Framework\Router;
 
 class Route
 {

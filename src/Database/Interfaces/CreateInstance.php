@@ -7,7 +7,7 @@
  * Interface pour les classes de connexion à une base de données
  */
 
-namespace Blackfox\Database\Interfaces;
+namespace ChrisDfr\Framework\Database\Interfaces;
 
 interface CreateInstance
 {

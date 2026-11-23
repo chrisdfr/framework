@@ -7,10 +7,10 @@
  * Créateur pour les entités
  */
 
-namespace Blackfox\Factories;
+namespace ChrisDfr\Framework\Factories;
 
-use Blackfox\Entities\Entity;
-use Blackfox\Exceptions\EntityErrorException;
+use ChrisDfr\Framework\Entities\Entity;
+use ChrisDfr\Framework\Exceptions\EntityErrorException;
 
 class EntityFactory
 {

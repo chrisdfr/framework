@@ -7,9 +7,9 @@
  * Exception émise si une entité est inexistante
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class EntityErrorException extends BlackfoxException
+class EntityErrorException extends ChrisDfr\FrameworkException
 {
 
 }

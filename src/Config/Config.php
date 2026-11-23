@@ -7,11 +7,11 @@
  * Gère les paramètres de configuration
  */
 
-namespace Blackfox\Config;
+namespace ChrisDfr\Framework\Config;
 
-use Blackfox\Application;
-use Blackfox\Config\Enums\AreaConfig;
-use Blackfox\Exceptions\BadConfigParamException;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\Config\Enums\AreaConfig;
+use ChrisDfr\Framework\Exceptions\BadConfigParamException;
 
 class Config extends AbstractConfig
 {

@@ -7,10 +7,10 @@
  * Retourne une instance de base de données en fonctions d'une api
  */
 
-namespace Blackfox\Factories;
+namespace ChrisDfr\Framework\Factories;
 
-use Blackfox\Exceptions\FactoryErrorException;
-use Blackfox\Factories\Enums\DatabaseAPI;
+use ChrisDfr\Framework\Exceptions\FactoryErrorException;
+use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 
 class DBFactory
 {
@@ -57,7 +57,7 @@ class DBFactory
                 return null;
             }
             
-            $factory = "Blackfox\\Database\\" . $this->api->value . "Factory";
+            $factory = "ChrisDfr\Framework\\Database\\" . $this->api->value . "Factory";
 
             if(!class_exists($factory)) {
                 throw new FactoryErrorException("La classe usine $factory n'a pas peu être trouvée.");

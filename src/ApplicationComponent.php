@@ -7,7 +7,7 @@
  * Classe de base pour les composantes de l'application
  */
 
-namespace Blackfox;
+namespace ChrisDfr\Framework;
 
 abstract class ApplicationComponent
 {

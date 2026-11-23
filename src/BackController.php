@@ -7,14 +7,14 @@
  * Controleur de base pour tous les controleurs d'une application
  */
 
-namespace Blackfox;
+namespace ChrisDfr\Framework;
 
-use Blackfox\Config\Config;
-use Blackfox\Config\Enums\AreaConfig;
-use Blackfox\Factories\EntityFactory;
-use Blackfox\Factories\ModelFactory;
-use Blackfox\Factories\Enums\DatabaseAPI;
-use Blackfox\View\View;
+use ChrisDfr\Framework\Config\Config;
+use ChrisDfr\Framework\Config\Enums\AreaConfig;
+use ChrisDfr\Framework\Factories\EntityFactory;
+use ChrisDfr\Framework\Factories\ModelFactory;
+use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
+use ChrisDfr\Framework\View\View;
 
 abstract class BackController extends ApplicationComponent
 {

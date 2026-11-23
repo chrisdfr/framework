@@ -7,17 +7,17 @@
  * Classe modélisant une application avec ses requêtes et ses réponces
  */
 
-namespace Blackfox;
+namespace ChrisDfr\Framework;
 
-use Blackfox\Config\Config;
-use Blackfox\Config\Link;
-use Blackfox\Config\Enums\AreaConfig;
-use Blackfox\Exceptions\InvalidRouteException;
-use Blackfox\Factories\DBFactory;
-use Blackfox\Factories\Enums\DatabaseAPI;
-use Blackfox\Handlers\ErrorHandler;
-use Blackfox\Router\Router;
-use Blackfox\User\User;
+use ChrisDfr\Framework\Config\Config;
+use ChrisDfr\Framework\Config\Link;
+use ChrisDfr\Framework\Config\Enums\AreaConfig;
+use ChrisDfr\Framework\Exceptions\InvalidRouteException;
+use ChrisDfr\Framework\Factories\DBFactory;
+use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
+use ChrisDfr\Framework\Handlers\ErrorHandler;
+use ChrisDfr\Framework\Router\Router;
+use ChrisDfr\Framework\User\User;
 
 abstract class Application
 {

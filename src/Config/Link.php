@@ -7,10 +7,10 @@
  * Gère les liens de l'application
  */
 
-namespace Blackfox\Config;
+namespace ChrisDfr\Framework\Config;
 
-use Blackfox\Application;
-use Blackfox\Exceptions\BadConfigParamException;
+use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\Exceptions\BadConfigParamException;
 
 class Link extends AbstractConfig
 {

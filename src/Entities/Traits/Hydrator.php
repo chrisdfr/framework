@@ -7,7 +7,7 @@
  * Permet d'initialiser les différents attributs d'un objet
  */
 
-namespace Blackfox\Entities\Traits;
+namespace ChrisDfr\Framework\Entities\Traits;
 
 trait Hydrator
 {	

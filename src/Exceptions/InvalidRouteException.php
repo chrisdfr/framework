@@ -7,9 +7,9 @@
  * Exception émise si une route est inexistante
  */
 
-namespace Blackfox\Exceptions;
+namespace ChrisDfr\Framework\Exceptions;
 
-class InvalidRouteException extends BlackfoxException
+class InvalidRouteException extends ChrisDfr\FrameworkException
 {
 
 }

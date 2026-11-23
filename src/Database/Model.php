@@ -7,7 +7,7 @@
  * Classe de base pour tous les modèles de l'application
  */
 
-namespace Blackfox\Database;
+namespace ChrisDfr\Framework\Database;
 
 abstract class Model
 {

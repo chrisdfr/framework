@@ -7,7 +7,7 @@
  * Gère l'initialisation d'un nouveau projet
  */
 
-namespace Blackfox\Scripts;
+namespace ChrisDfr\Framework\Scripts;
 
 class CreateProject
 {
