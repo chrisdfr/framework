@@ -2,14 +2,14 @@
     "name": "chrisdfr/framework",
     "description": "Le framework Blackfox",
     "keywords": ["blackfox", "framework"],
-    "type": "framework",
+    "type": "library",
     "require": {
         "twig/twig": "^3.14"
     },
     "license": "LGPL-2.1-or-later",
     "autoload": {
         "psr-4": {
-            "Blackfox\\": "src/Blackfox/"
+            "ChrisDfr\\Framework\\": "src/"
         }
     },
     "authors": [
