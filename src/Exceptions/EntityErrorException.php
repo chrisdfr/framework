@@ -9,7 +9,7 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class EntityErrorException extends ChrisDfr\FrameworkException
+class EntityErrorException extends BlackfoxException
 {
-
+    //
 }

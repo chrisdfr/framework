@@ -9,7 +9,7 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class InvalidRouteException extends ChrisDfr\FrameworkException
+class InvalidRouteException extends BlackfoxException
 {
-
+    //
 }

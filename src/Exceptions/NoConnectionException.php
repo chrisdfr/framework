@@ -9,7 +9,7 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class NoConnectionException extends ChrisDfr\FrameworkException
+class NoConnectionException extends BlackfoxException
 {
-
+    //
 }
