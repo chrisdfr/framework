@@ -15,7 +15,7 @@ use Deprecated;
 class HTTPResponse extends ApplicationComponent
 {
 	// La vue à afficher
-	protected View $view {
+	public View $view {
 		set => $this->view = $value;
 	}
 	
