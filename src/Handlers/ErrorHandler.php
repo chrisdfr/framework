@@ -25,7 +25,7 @@ class ErrorHandler extends AbstractErrorHandler
     {
         parent::__construct($app);
 
-        $this->filename = $this->app->rootDir() . str_replace("/", DIRECTORY_SEPARATOR, "/log/errors.log");
+        $this->filename = $this->app->rootDir . str_replace("/", DIRECTORY_SEPARATOR, "/log/errors.log");
         $this->setExceptionHandler([$this, 'errorHandler']);
     }
 

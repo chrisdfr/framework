@@ -25,7 +25,7 @@ class User extends ApplicationComponent
 
 		$cookieParams = array(
 			'lifetime' 	=> 0,
-			'path' 		=> $this->app->httpRequest()->contextPrefix(),
+			'path' 		=> $this->app->httpRequest->contextPrefix(),
 			'domain' 	=> "",
 			'secure' 	=> true,
 			'httponly' 	=> true,

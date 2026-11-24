@@ -24,7 +24,7 @@ class Config extends AbstractConfig
      */
     public static function init(Application $app): void
     {
-        self::$file[static::class] = $app->rootDir() . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
+        self::$file[static::class] = $app->rootDir . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
         self::load();
     }
 

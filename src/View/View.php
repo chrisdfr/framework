@@ -37,11 +37,11 @@ class View extends ApplicationComponent
 	{
 		parent::__construct($application);
 		
-		$data[] = $this->app->rootDir() . str_replace("/", DIRECTORY_SEPARATOR , "/html/templates/");
-		$data[] = $this->app->rootDir() . str_replace("/", DIRECTORY_SEPARATOR , "/html/errors/");
+		$data[] = $this->app->rootDir . str_replace("/", DIRECTORY_SEPARATOR , "/html/templates/");
+		$data[] = $this->app->rootDir . str_replace("/", DIRECTORY_SEPARATOR , "/html/errors/");
 		
 		if(!empty($controller)) {
-			$data[] = $this->app->appDir() . str_replace("/", DIRECTORY_SEPARATOR, "/Controllers/$controller/views/");
+			$data[] = $this->app->appDir . str_replace("/", DIRECTORY_SEPARATOR, "/Controllers/$controller/views/");
 		}
 		
 		$this->path = $data;
@@ -135,7 +135,7 @@ class View extends ApplicationComponent
 			throw new \RuntimeException("La vue spécifiée n'existe pas.");
 		}
 		
-		$this->data['user'] = $this->app->user();
+		$this->data['user'] = $this->app->user;
 
 		if($links = Link::vars()) {
 			$this->setData($links);

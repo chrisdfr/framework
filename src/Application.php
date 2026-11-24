@@ -7,6 +7,8 @@
  * Classe modélisant une application avec ses requêtes et ses réponces
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\Config\Config;
@@ -18,23 +20,44 @@ use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 use ChrisDfr\Framework\Handlers\ErrorHandler;
 use ChrisDfr\Framework\Router\Router;
 use ChrisDfr\Framework\User\User;
+use Deprecated;
 
 abstract class Application
 {
 	// Dossier racine de l'application
-	protected string $rootDir;
+	public protected(set) string $rootDir {
+		get => $this->rootDir;
+	}
+
 	// Dossier des fichiers sources de l'application
-	protected string $appDir;
+	public protected(set) string $appDir {
+		get => $this->appDir;
+	}
+	
 	// Namespace de l'application où l'on se trouve
-	protected string $nameSpace;
+	public protected(set) string $nameSpace {
+		get => $this->nameSpace;
+	}
+
 	// Objet représentant une requête html
-	protected HTTPRequest $httpRequest;
+	public protected(set) HTTPRequest $httpRequest {
+		get => $this->httpRequest;
+	}
+
 	// Objet représentant une réponce html
-	protected HTTPResponse $httpResponse;
+	public protected(set) HTTPResponse $httpResponse {
+		get => $this->httpResponse;
+	}
+
 	// Objet représentant l'utilisateur
-	protected User $user;
+	public protected(set) User $user {
+		get => $this->user;
+	}
+
 	// Factory de la base de données
-	protected mixed $dbFactory;
+	public protected(set) mixed $dbFactory {
+		get => $this->dbFactory;
+	}
 	
 	/**
 	 * Constructeur
@@ -63,6 +86,7 @@ abstract class Application
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$rootDir qui est public en lecture")]
 	public function rootDir(): string
 	{
 		return $this->rootDir;
@@ -73,6 +97,7 @@ abstract class Application
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$appDir qui est public en lecture")]
 	public function appDir(): string
 	{
 		return $this->appDir;
@@ -83,6 +108,7 @@ abstract class Application
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$nameSpace qui est public en lecture")]
 	public function nameSpace(): string
 	{
 		return $this->nameSpace;
@@ -93,6 +119,7 @@ abstract class Application
 	 * 
 	 * @return HTTPRequest
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$httpRequest qui est public en lecture")]
 	public function httpRequest(): HTTPRequest
 	{
 		return $this->httpRequest;
@@ -103,6 +130,7 @@ abstract class Application
 	 * 
 	 * @return HTTPResponse
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$httpResponse qui est public en lecture")]
 	public function httpResponse(): HTTPResponse
 	{
 		return $this->httpResponse;
@@ -113,6 +141,7 @@ abstract class Application
 	 * 
 	 * @return User
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$user qui est public en lecture")]
 	public function user(): User
 	{
 		return $this->user;
@@ -123,6 +152,7 @@ abstract class Application
 	 * 
 	 * @return mixed
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$dbFactory qui est public en lecture")]
 	public function dbFactory(): mixed
 	{
 		return $this->dbFactory;

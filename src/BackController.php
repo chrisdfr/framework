@@ -43,7 +43,7 @@ abstract class BackController extends ApplicationComponent
 	public function __construct(Application $app, string $controller, string $method)
 	{
 		parent::__construct($app);
-		$this->modelFactory = new ModelFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')), $this->app->dbFactory()->get());
+		$this->modelFactory = new ModelFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')), $this->app->dbFactory->get());
 		$this->entityFactory = new EntityFactory;
 		$this->view = new View($app, $controller);
 		$this->setController($controller);
@@ -131,7 +131,7 @@ abstract class BackController extends ApplicationComponent
 			throw new \RuntimeException("La méthode $this->method n'est pas définie sur ce controller");
 		}
 		
-		$this->$method($this->app->httpRequest());
+		$this->$method($this->app->httpRequest);
 	}
 	
 }

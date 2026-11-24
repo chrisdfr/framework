@@ -64,8 +64,8 @@ abstract class AbstractErrorHandler extends ApplicationComponent
             $view->setViewFile("unknownError");
         }
 
-        $this->app->httpResponse()->setView($view);
-        $this->app->httpResponse()->render();
+        $this->app->httpResponse->setView($view);
+        $this->app->httpResponse->render();
     }
     
     /**
