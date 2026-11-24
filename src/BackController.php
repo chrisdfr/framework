@@ -7,6 +7,8 @@
  * Controleur de base pour tous les controleurs d'une application
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\Config\Config;
@@ -15,6 +17,7 @@ use ChrisDfr\Framework\Factories\EntityFactory;
 use ChrisDfr\Framework\Factories\ModelFactory;
 use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 use ChrisDfr\Framework\View\View;
+use Deprecated;
 
 abstract class BackController extends ApplicationComponent
 {
@@ -22,14 +25,45 @@ abstract class BackController extends ApplicationComponent
 	protected ModelFactory $modelFactory;
 	// Créateur pour les entités
 	protected EntityFactory $entityFactory;
+
 	// Le nom du contrôleur actuel
-	protected string $controller = "";
+	protected string $controller = "" {
+		set {
+			if(empty($value)) {
+				throw new \ValueError("Le controller ne peut pas être une chaine de caractère vide");
+			}
+
+			$this->controller = $value;
+		}
+	}
+
 	// La méthode à éxécuter
-	protected string $method = "";
+	protected string $method = "" {
+		set {
+			if(empty($value)) {
+				throw new \ValueError("La méthode ne peut pas être une chaine de caractère vide");
+			}
+		
+			$this->method = $value;
+		}
+	}
+
 	// Le nom du fichier vue à afficher
-	protected string $viewFile = "";
+	protected string $viewFile = "" {
+		set {
+			if(empty($value)) {
+				throw new \ValueError("La vue ne peut pas être une chaine de caractère vide");
+			}
+		
+			$this->viewFile = $value;
+			$this->view->setViewFile($this->viewFile);
+		}
+	}
+	
 	// La vue à afficher
-	protected View $view;
+	public protected(set) View $view {
+		get => $this->view;
+	}
 	
 	/**
 	 * Constructeur
@@ -46,9 +80,9 @@ abstract class BackController extends ApplicationComponent
 		$this->modelFactory = new ModelFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')), $this->app->dbFactory->get());
 		$this->entityFactory = new EntityFactory;
 		$this->view = new View($app, $controller);
-		$this->setController($controller);
-		$this->setMethod($method);
-		$this->setViewFile($method);
+		$this->controller = $controller;
+		$this->method = $method;
+		$this->viewFile = $method;
 	}
 	
 	/**
@@ -56,6 +90,7 @@ abstract class BackController extends ApplicationComponent
 	 * 
 	 * @return View
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$view qui est public en lecture")]
 	public function view(): View
 	{
 		return $this->view;
@@ -70,6 +105,7 @@ abstract class BackController extends ApplicationComponent
 	 * 
 	 * @throws ValueError
 	 */
+	#[Deprecated("Accédez directement à l'attribut protected \$controller ")]
 	public function setController(string $controller): void
 	{
 		if(empty($controller)) {
@@ -88,6 +124,7 @@ abstract class BackController extends ApplicationComponent
 	 * 
 	 * @throws ValueError
 	 */
+	#[Deprecated("Accédez directement à l'attribut protected \$method ")]
 	public function setMethod(string $method): void
 	{
 		if(empty($method)) {
@@ -106,6 +143,7 @@ abstract class BackController extends ApplicationComponent
 	 * 
 	 * @throws ValueError
 	 */
+	#[Deprecated("Accédez directement à l'attribut protected \$viewFile ")]
 	public function setViewFile(string $viewFile): void
 	{
 		if(empty($viewFile)) {

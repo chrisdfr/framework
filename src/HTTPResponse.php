@@ -10,11 +10,14 @@
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\View\View;
+use Deprecated;
 
 class HTTPResponse extends ApplicationComponent
 {
 	// La vue à afficher
-	protected View $view;
+	protected View $view {
+		set => $this->view = $value;
+	}
 	
 	/**
 	 * Modifie la valeur de $view
@@ -23,6 +26,7 @@ class HTTPResponse extends ApplicationComponent
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut protected \$view ")]
 	public function setView(View $view): void
 	{
 		$this->view = $view;

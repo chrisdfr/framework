@@ -9,10 +9,14 @@
 
 namespace ChrisDfr\Framework;
 
+use Deprecated;
+
 abstract class ApplicationComponent
 {
 	// Instance de l'application
-	protected Application $app;
+	public protected(set) Application $app {
+		get => $this->app;
+	}
 	
 	/**
 	 * Constructeur
@@ -29,6 +33,7 @@ abstract class ApplicationComponent
 	 * 
 	 * @return Application 
 	 */
+	#[Deprecated("Accédez directement à l'attribut \$app qui est public en lecture")]
 	public function app(): Application
 	{
 		return $this->app;
