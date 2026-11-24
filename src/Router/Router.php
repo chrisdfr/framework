@@ -7,6 +7,8 @@
  * Gére les différentes route de l'application
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Router;
 
 use ChrisDfr\Framework\Exceptions\InvalidRouteException;
@@ -30,7 +32,7 @@ class Router
         foreach(self::$routes as $route) {
 			if(($varsValues = $route->match($url)) !== false) {
 				if($route->hasVars()) {
-					$varsNames = $route->varsNames();
+					$varsNames = $route->varsNames;
 					$listVars = array();
 					
 					foreach($varsValues as $key => $match) {
@@ -39,7 +41,7 @@ class Router
 						}
 					}
 					
-					$route->setVars($listVars);
+					$route->vars = $listVars;
 				}
 				
 				return $route;

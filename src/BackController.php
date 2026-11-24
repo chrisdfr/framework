@@ -27,7 +27,7 @@ abstract class BackController extends ApplicationComponent
 	protected EntityFactory $entityFactory;
 
 	// Le nom du contrôleur actuel
-	protected string $controller = "" {
+	public string $controller = "" {
 		set {
 			if(empty($value)) {
 				throw new \ValueError("Le controller ne peut pas être une chaine de caractère vide");
@@ -38,7 +38,7 @@ abstract class BackController extends ApplicationComponent
 	}
 
 	// La méthode à éxécuter
-	protected string $method = "" {
+	public string $method = "" {
 		set {
 			if(empty($value)) {
 				throw new \ValueError("La méthode ne peut pas être une chaine de caractère vide");
@@ -49,21 +49,19 @@ abstract class BackController extends ApplicationComponent
 	}
 
 	// Le nom du fichier vue à afficher
-	protected string $viewFile = "" {
+	public string $viewFile = "" {
 		set {
 			if(empty($value)) {
 				throw new \ValueError("La vue ne peut pas être une chaine de caractère vide");
 			}
 		
 			$this->viewFile = $value;
-			$this->view->setViewFile($this->viewFile);
+			$this->view->viewFile = $this->viewFile;
 		}
 	}
 	
 	// La vue à afficher
-	public protected(set) View $view {
-		get => $this->view;
-	}
+	public protected(set) View $view;
 	
 	/**
 	 * Constructeur

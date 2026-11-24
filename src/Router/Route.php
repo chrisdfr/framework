@@ -7,20 +7,24 @@
  * Classe modélisant une route
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Router;
+
+use Deprecated;
 
 class Route
 {
 	// Url de la route
-	protected string $url;
+	public protected(set) string $url;
 	// Contrôlleur qu'il faudra instancier
-	protected string $controller;
+	public protected(set) string $controller;
 	// La méthode qu'il faudra appeler
-	protected string $method;
+	public protected(set) string $method;
 	// Variable à initialiser à partir de l'url
-	protected array $varsNames;
+	public protected(set) array $varsNames;
 	// Tableau des variables
-	protected array $vars = [];
+	public array $vars = [];
 
 	/**
 	 * Constructeur
@@ -46,6 +50,7 @@ class Route
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$url")]
 	public function url(): string
 	{
 		return $this->url;
@@ -56,6 +61,7 @@ class Route
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$controller")]
 	public function controller(): string
 	{
 		return $this->controller;
@@ -66,6 +72,7 @@ class Route
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$method")]
 	public function method(): string
 	{
 		return $this->method;
@@ -76,6 +83,7 @@ class Route
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$varsNames")]
 	public function varsNames(): array
 	{
 		return $this->varsNames;
@@ -86,6 +94,7 @@ class Route
 	 * 
 	 * @return string
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$vars")]
 	public function vars(): array
 	{
 		return $this->vars;
@@ -98,6 +107,7 @@ class Route
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$url")]
 	public function setUrl(string $url): void
 	{
 		if(is_string($url)) {
@@ -112,6 +122,7 @@ class Route
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$controller")]
 	public function setController(string $controller): void
 	{
 		if(is_string($controller)) {
@@ -126,6 +137,7 @@ class Route
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$method")]
 	public function setMethod(string $method): void
 	{
 		if(is_string($method)) {
@@ -140,6 +152,7 @@ class Route
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$varsNames")]
 	public function setVarsNames(array $varsNames): void
 	{
 		$this->varsNames = $varsNames;
@@ -152,6 +165,7 @@ class Route
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$vars")]
 	public function setVars(array $vars): void
 	{
 		$this->vars = $vars;

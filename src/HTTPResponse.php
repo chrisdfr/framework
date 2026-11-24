@@ -7,6 +7,8 @@
  * Classe modélidant une réponce html
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\View\View;
@@ -15,9 +17,7 @@ use Deprecated;
 class HTTPResponse extends ApplicationComponent
 {
 	// La vue à afficher
-	public View $view {
-		set => $this->view = $value;
-	}
+	public View $view;
 	
 	/**
 	 * Modifie la valeur de $view
@@ -65,7 +65,7 @@ class HTTPResponse extends ApplicationComponent
 	public function redirect404(): void
 	{
 		$this->view = new View($this->app);
-		$this->view->setViewFile("404Error");
+		$this->view->viewFile = "404Error";
 		
 		$this->addHeader('HTTP/1.0 404 Not Found');
 		$this->render();

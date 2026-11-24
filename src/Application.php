@@ -25,39 +25,19 @@ use Deprecated;
 abstract class Application
 {
 	// Dossier racine de l'application
-	public protected(set) string $rootDir {
-		get => $this->rootDir;
-	}
-
+	public protected(set) string $rootDir;
 	// Dossier des fichiers sources de l'application
-	public protected(set) string $appDir {
-		get => $this->appDir;
-	}
-	
+	public protected(set) string $appDir;
 	// Namespace de l'application où l'on se trouve
-	public protected(set) string $nameSpace {
-		get => $this->nameSpace;
-	}
-
+	public protected(set) string $nameSpace;
 	// Objet représentant une requête html
-	public protected(set) HTTPRequest $httpRequest {
-		get => $this->httpRequest;
-	}
-
+	public protected(set) HTTPRequest $httpRequest;
 	// Objet représentant une réponce html
-	public protected(set) HTTPResponse $httpResponse {
-		get => $this->httpResponse;
-	}
-
+	public protected(set) HTTPResponse $httpResponse;
 	// Objet représentant l'utilisateur
-	public protected(set) User $user {
-		get => $this->user;
-	}
-
+	public protected(set) User $user;
 	// Factory de la base de données
-	public protected(set) mixed $dbFactory {
-		get => $this->dbFactory;
-	}
+	public protected(set) mixed $dbFactory;
 	
 	/**
 	 * Constructeur
@@ -174,10 +154,10 @@ abstract class Application
 			$this->httpResponse->redirect404();
 		}
 		
-		$_GET = array_merge($_GET, $matchedRoute->vars());
-		$controllerClass = $this->nameSpace . "\\Controllers\\" . $matchedRoute->controller() . "\\" . $matchedRoute->controller() . "Controller";
+		$_GET = array_merge($_GET, $matchedRoute->vars);
+		$controllerClass = $this->nameSpace . "\\Controllers\\" . $matchedRoute->controller . "\\" . $matchedRoute->controller . "Controller";
 		
-		return new $controllerClass($this, $matchedRoute->controller(), $matchedRoute->method());
+		return new $controllerClass($this, $matchedRoute->controller, $matchedRoute->method);
 	}
 
 	/**

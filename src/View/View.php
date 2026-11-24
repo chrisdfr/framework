@@ -7,20 +7,35 @@
  * Controleur de base pour tous les controleurs d'une application.
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\View;
 
 use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Config\Link;
 
+use Deprecated;
+
 class View extends ApplicationComponent
 {
 	// Tableau des chemins ou sont stoqués les templates
 	protected array $path = [];
+
 	// Le nom du fichier vue
-	protected string $viewFile;
+	public string $viewFile {
+		set {
+			if(empty($value)) {
+				throw new \ValueError("La vue spécifiée est invalide");
+			}
+		
+			$this->viewFile = $value;
+		}
+	}
+
 	// L'extention des fichiers vue
 	protected string $ext = ".html";
+	
 	// Les données à remplacer dans les templates
 	protected array $data = [];
 	
@@ -56,6 +71,7 @@ class View extends ApplicationComponent
 	 * 
 	 * @throws ValueError
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$viewFile")]
 	public function setViewFile(string $viewFile): void
 	{
 		if(empty($viewFile)) {

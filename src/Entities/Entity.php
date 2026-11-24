@@ -7,9 +7,13 @@
  * Classe de base pour toutes les entités.
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Entities;
 
 use ChrisDfr\Framework\Entities\Traits\Hydrator;
+
+use Deprecated;
 
 abstract class Entity
 {
@@ -17,9 +21,15 @@ abstract class Entity
 	use Hydrator;
 	
 	// Identifiant unique de l'entité
-	protected int $id;
+	public int $id {
+		set {
+			if($value > 0) {
+				$this->id = $value;
+			}
+		}
+	}
 	// Tableau des éventuelles erreurs
-	protected array $errors = [];
+	public protected(set) array $errors = [];
 	
 	/**
 	 * Constructeur
@@ -40,6 +50,7 @@ abstract class Entity
 	 * 
 	 * @return int
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$id")]
 	public function id(): int
 	{
 		return $this->id;
@@ -50,6 +61,7 @@ abstract class Entity
 	 * 
 	 * @return array
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$errors")]
 	public function errors(): array
 	{
 		return $this->errors;
@@ -62,6 +74,7 @@ abstract class Entity
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Accédez directement à l'attribut public \$id")]
 	public function setId(int $id): void
 	{
 		if($id > 0) {
