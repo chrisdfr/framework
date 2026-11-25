@@ -13,19 +13,24 @@ use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\Config\Enums\AreaConfig;
 use ChrisDfr\Framework\Exceptions\BadConfigParamException;
 
+use Deprecated;
+
 class Config extends AbstractConfig
 {
     const FILENAME = "/config/conf.json";
+    
+    public protected(set) static array $vars;
     
     /**
      * Initialisation
      * 
      * @return void
      */
+    #[Deprecated("Méthode vouée à disparaître")]
     public static function init(Application $app): void
     {
         self::$file[static::class] = $app->rootDir . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
-        self::load();
+        self::load(self::$file[static::class]);
     }
 
     /**
@@ -41,7 +46,8 @@ class Config extends AbstractConfig
 	 */
 	public static function set(string $key, mixed $value, AreaConfig $index): void
 	{
-        self::$vars[static::class][$index->value][$key] = $value;
+        //self::$vars[static::class][$index->value][$key] = $value;
+        self::$vars[$index->value][$key] = $value;
 	}
 
     /**
@@ -54,6 +60,7 @@ class Config extends AbstractConfig
      * @return bool
      * Retourne true en cas de succès, sinon false
      */
+    #[Deprecated("Méthode vouée à disparaître")]
     public static function exists(string $key, AreaConfig $index): bool
     {
         return array_key_exists($key, self::$vars[static::class][$index->value]);
@@ -72,6 +79,7 @@ class Config extends AbstractConfig
      * 
      * @throws BadConfigParamException
 	 */
+    #[Deprecated("Méthode vouée à disparaître")]
 	public static function get(AreaConfig $index, string $key = ""): mixed
 	{
         if(empty($key)) {
@@ -96,6 +104,7 @@ class Config extends AbstractConfig
      * 
      * @throws BadConfigParamException
      */
+    #[Deprecated("Méthode vouée à disparaître")]
     public static function __callStatic(string $name, array $arguments): mixed
     {
         if(!AreaConfig::tryFrom($name)) {

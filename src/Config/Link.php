@@ -12,19 +12,24 @@ namespace ChrisDfr\Framework\Config;
 use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\Exceptions\BadConfigParamException;
 
+use Deprecated;
+
 class Link extends AbstractConfig
 {
     const FILENAME = "/config/link.json";
+
+    public protected(set) static array $vars;
 
     /**
      * Initialisation
      * 
      * @return void
      */
+    #[Deprecated("Méthode vouée à disparaître")]
     public static function init(Application $app): void
     {
         self::$file[static::class] = $app->rootDir . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
-        !self::load();
+        !self::load(self::$file[static::class]);
     }
 
     /**
@@ -38,7 +43,8 @@ class Link extends AbstractConfig
      */
     public static function set(string $key, mixed $value): void
     {
-        self::$vars[static::class][$key] = $value;
+        //self::$vars[static::class][$key] = $value;
+        self::$vars[$key] = $value;
     }
 
     /**
@@ -49,6 +55,7 @@ class Link extends AbstractConfig
      * @return bool
      * Retourne true si la variable existe, sinon false
      */
+    #[Deprecated("Méthode vouée à disparaître")]
     public static function exists(string $key): bool
     {
         return array_key_exists($key, self::$vars[static::class]);
@@ -63,6 +70,7 @@ class Link extends AbstractConfig
      * 
      * @throws BadConfigParamExecption
 	 */
+    #[Deprecated("Méthode vouée à disparaître")]
 	public static function get(string $key): mixed
 	{
 		if(!array_key_exists($key, self::$vars[static::class])) {

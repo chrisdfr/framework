@@ -52,12 +52,25 @@ abstract class Application
 		$this->httpResponse = new HTTPResponse($this);
 		$this->user = new User($this);
 
-		Config::init($this);
-		Link::init($this);
+		//Config::init($this);
+		//Link::init($this);
+
+		$configFile = $this->rootDir . str_replace('/', DIRECTORY_SEPARATOR, "/config/conf.json");
+		$linkFile = $this->rootDir . str_replace('/', DIRECTORY_SEPARATOR, "/config/link.json");
+
+		Config::load($configFile);
+		Link::load($linkFile);
+		
+		/*
 		$this->dbFactory = new DBFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')),
 															Config::get(AreaConfig::Database, 'dbname'), 
 															Config::get(AreaConfig::Database, 'username'),
 															Config::get(AreaConfig::Database, 'password'));
+		*/
+		$this->dbFactory = new DBFactory(DatabaseAPI::from(Config::$vars['database']['api']),
+															Config::$vars['database']['dbname'], 
+															Config::$vars['database']['username'],
+															Config::$vars['database']['password']);
 		ErrorHandler::init($this);
 	}
 	
