@@ -4,7 +4,7 @@
  * BlackfoxException.php
  * @Auteur: Christophe Dufour
  * 
- * Classe de base pour toutes les exceptions de Mamba
+ * Classe de base pour toutes les exceptions
  */
 
 namespace ChrisDfr\Framework\Exceptions;
