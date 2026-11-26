@@ -9,7 +9,9 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class NoConnectionException extends BlackfoxException
+use Exception;
+
+class NoDatabaseConnection extends Exception
 {
     //
 }

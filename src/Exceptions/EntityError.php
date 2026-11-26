@@ -9,7 +9,9 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class EntityErrorException extends BlackfoxException
+use Exception;
+
+class EntityError extends Exception
 {
     //
 }

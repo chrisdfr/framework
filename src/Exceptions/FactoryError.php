@@ -9,7 +9,9 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class FactoryErrorException extends BlackfoxException
+use Exception;
+
+class FactoryError extends Exception
 {
     //
 }

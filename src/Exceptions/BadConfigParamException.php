@@ -9,7 +9,9 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class BadConfigParamException extends BlackfoxException
+use Exception;
+
+class BadConfigParamException extends Exception
 {
     //
 }

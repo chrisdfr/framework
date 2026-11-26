@@ -9,7 +9,9 @@
 
 namespace ChrisDfr\Framework\Exceptions;
 
-class InvalidJSON extends BlackfoxException
+use Exception;
+
+class InvalidJSON extends Exception
 {
     //
 }
