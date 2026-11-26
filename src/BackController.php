@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework;
 
-use ChrisDfr\Framework\Config\Config;
 use ChrisDfr\Framework\Factories\EntityFactory;
-use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 use ChrisDfr\Framework\Factories\ModelFactory;
 use ChrisDfr\Framework\View\View;
 use Deprecated;
@@ -76,8 +74,11 @@ abstract class BackController extends ApplicationComponent
 	public function __construct(Application $app, string $controller, string $method)
 	{
 		parent::__construct($app);
-		//$this->modelFactory = new ModelFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')), $this->app->dbFactory->get());
-		$this->modelFactory = new ModelFactory(DatabaseAPI::from(Config::$vars['database']['api']), $this->app->dbFactory->get());
+		
+		if(!is_null($this->app->dbFactory)) {
+			$this->modelFactory = new ModelFactory($this->app->dbFactory->api, $this->app->dbFactory->get());
+		}
+
 		$this->entityFactory = new EntityFactory;
 		$this->view = new View($app, $controller);
 		$this->controller = $controller;
@@ -151,7 +152,7 @@ abstract class BackController extends ApplicationComponent
 		}
 		
 		$this->viewFile = $viewFile;
-		$this->view->setViewFile($this->viewFile);
+		$this->view->viewFile = $this->viewFile;
 	}
 	
 	/**
@@ -166,7 +167,7 @@ abstract class BackController extends ApplicationComponent
 		$method = "execute" . ucfirst($this->method);
 		
 		if(!is_callable(array($this, $method))) {
-			throw new RuntimeException("La méthode $this->method n'est pas définie sur ce controller");
+			throw new RuntimeException("Méthode $this->method n'est pas définie dans le controller $this->controller");
 		}
 		
 		$this->$method($this->app->httpRequest);
