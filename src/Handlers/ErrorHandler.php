@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace ChrisDfr\Framework\Handlers;
 
 use ChrisDfr\Framework\Application;
+use ChrisDfr\Framework\View\View;
+use Throwable;
 
 class ErrorHandler extends AbstractErrorHandler
 {
@@ -28,30 +30,30 @@ class ErrorHandler extends AbstractErrorHandler
         parent::__construct($app);
 
         $this->filename = $this->app->rootDir . str_replace("/", DIRECTORY_SEPARATOR, "/log/errors.log");
-        $this->setExceptionHandler([$this, 'errorHandler']);
+        $this->setExceptionHandler([$this, 'exceptionHandler']);
     }
 
     /**
      * Intercepte les exeptions lancées
      * 
-     * @param \Throwable $exception
+     * @param Throwable $ex
      * 
      * @return void
      */
-    public function errorHandler(\Throwable $exception): void
+    public function exceptionHandler(Throwable $ex): void
     {
         $time = new \DateTime();
 
         $datas = array(
             'time' => $time->format("[Y-m-d à H:i]"),
-            'errorType' => get_class($exception),
-            'file' => basename($exception->getFile()),
-            'line' => $exception->getLine(),
-            'message' => $exception->getMessage()
+            'errorType' => get_class($ex),
+            'file' => basename($ex->getFile()),
+            'line' => $ex->getLine(),
+            'message' => $ex->getMessage()
         );
 
         $this->write($datas);
-        $this->display($exception);
+        $this->display($ex);
     }
 
     /**
@@ -59,7 +61,7 @@ class ErrorHandler extends AbstractErrorHandler
      * 
      * @return void
      */
-    protected function write(array $datas)
+    protected function write(array $datas): void
     {
 		$file = new \SplFileObject($this->filename, "a+");
 
@@ -69,10 +71,28 @@ class ErrorHandler extends AbstractErrorHandler
 
         $file->fwrite($string);
     }
-
-    /**
-     * INTERDIT l'appel à l'opérateur "clone" 
-     */
-    private function __clone():void {}
     
+    /**
+     * Affiche une vue d'erreur
+     * 
+     * @param \Throwable $exception
+     * 
+     * @return void
+     */
+    protected function display(\Throwable $exception): void
+    {
+        $view = new View($this->app);
+
+        if(DisplayErrors::displayErrors()) {
+            $view->viewFile = "detectedError";
+            $view->setData('error', $exception);
+        }
+        else {
+            $view->viewFile = "unknownError";
+        }
+
+        $this->app->httpResponse->view = $view;
+        $this->app->httpResponse->render();
+    }
+
 }

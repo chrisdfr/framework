@@ -65,7 +65,7 @@ class DisplayErrors
         return ini_set("error_log", $filename);
     }
 
-     /**
+    /**
 	 * Fixe le niveau de rapport d'erreurs PHP
 	 * 
 	 * @param int $error_level
@@ -90,19 +90,6 @@ class DisplayErrors
     public static function setErrorHandler(?callable $callback, int $error_levels = E_ALL): ?callable
     {
         return set_error_handler($callback, $error_levels);
-    }
-
-
-    /**
-     * Définit une fonction pour la gestion d'exceptions 
-     * 
-     * @param ?callable $callback
-     * [optionnel] La fonction à appeler quand une exception se produit
-     * @return ?callable
-     */
-    public static function setExceptionHandler(?callable $callback): ?callable
-    {
-        return set_exception_handler($callback);
     }
 
 }
