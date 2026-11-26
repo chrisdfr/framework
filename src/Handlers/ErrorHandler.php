@@ -7,6 +7,8 @@
  * Gère les erreurs du frameword et les enregistre
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Handlers;
 
 use ChrisDfr\Framework\Application;

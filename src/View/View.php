@@ -14,8 +14,9 @@ namespace ChrisDfr\Framework\View;
 use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Config\Link;
-
 use Deprecated;
+use RuntimeException;
+use ValueError;
 
 class View extends ApplicationComponent
 {
@@ -26,7 +27,7 @@ class View extends ApplicationComponent
 	public string $viewFile {
 		set {
 			if(empty($value)) {
-				throw new \ValueError("La vue spécifiée est invalide");
+				throw new ValueError("La vue spécifiée est invalide");
 			}
 		
 			$this->viewFile = $value;
@@ -75,7 +76,7 @@ class View extends ApplicationComponent
 	public function setViewFile(string $viewFile): void
 	{
 		if(empty($viewFile)) {
-			throw new \ValueError("La vue spécifiée est invalide");
+			throw new ValueError("La vue spécifiée est invalide");
 		}
 		
 		$this->viewFile = $viewFile;
@@ -97,14 +98,14 @@ class View extends ApplicationComponent
 	{
 		if(is_array($data)) {
 			if(empty($data)) {
-				throw new \ValueError("Le tableau des variables ne doit pas être nul");
+				throw new ValueError("Le tableau des variables ne doit pas être nul");
 			}
 			
 			$this->data = array_merge($this->data, $data);
 		}
 		else {
 			if(empty($data)) {
-				throw new \ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
+				throw new ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
 			}
 			
 			$this->data[$data] = $value;
@@ -120,10 +121,11 @@ class View extends ApplicationComponent
 	 * 
 	 * @return void
 	 */
+	#[Deprecated("Méthode vouée à disparaître")]
 	public function __set(string $name, mixed $value): void
 	{
 		if(empty($name)) {
-			throw new \ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
+			throw new ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
 		}
 
 		$this->data[$name] = $value;
@@ -148,7 +150,7 @@ class View extends ApplicationComponent
 		}
 		
 		if(!$fileExists) {
-			throw new \RuntimeException("La vue spécifiée n'existe pas.");
+			throw new RuntimeException("La vue spécifiée n'existe pas.");
 		}
 		
 		$this->data['user'] = $this->app->user;

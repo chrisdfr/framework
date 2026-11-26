@@ -12,12 +12,13 @@ declare(strict_types=1);
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\Config\Config;
-use ChrisDfr\Framework\Config\Enums\AreaConfig;
 use ChrisDfr\Framework\Factories\EntityFactory;
-use ChrisDfr\Framework\Factories\ModelFactory;
 use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
+use ChrisDfr\Framework\Factories\ModelFactory;
 use ChrisDfr\Framework\View\View;
 use Deprecated;
+use RuntimeException;
+use ValueError;
 
 abstract class BackController extends ApplicationComponent
 {
@@ -30,7 +31,7 @@ abstract class BackController extends ApplicationComponent
 	public string $controller = "" {
 		set {
 			if(empty($value)) {
-				throw new \ValueError("Le controller ne peut pas être une chaine de caractère vide");
+				throw new ValueError("Le controller ne peut pas être une chaine de caractère vide");
 			}
 
 			$this->controller = $value;
@@ -41,7 +42,7 @@ abstract class BackController extends ApplicationComponent
 	public string $method = "" {
 		set {
 			if(empty($value)) {
-				throw new \ValueError("La méthode ne peut pas être une chaine de caractère vide");
+				throw new ValueError("La méthode ne peut pas être une chaine de caractère vide");
 			}
 		
 			$this->method = $value;
@@ -52,7 +53,7 @@ abstract class BackController extends ApplicationComponent
 	public string $viewFile = "" {
 		set {
 			if(empty($value)) {
-				throw new \ValueError("La vue ne peut pas être une chaine de caractère vide");
+				throw new ValueError("La vue ne peut pas être une chaine de caractère vide");
 			}
 		
 			$this->viewFile = $value;
@@ -108,7 +109,7 @@ abstract class BackController extends ApplicationComponent
 	public function setController(string $controller): void
 	{
 		if(empty($controller)) {
-			throw new \ValueError("Le controller ne peut pas être une chaine de caractère vide");
+			throw new ValueError("Le controller ne peut pas être une chaine de caractère vide");
 		}
 		
 		$this->controller = $controller;
@@ -127,7 +128,7 @@ abstract class BackController extends ApplicationComponent
 	public function setMethod(string $method): void
 	{
 		if(empty($method)) {
-			throw new \ValueError("La méthode ne peut pas être une chaine de caractère vide");
+			throw new ValueError("La méthode ne peut pas être une chaine de caractère vide");
 		}
 		
 		$this->method = $method;
@@ -146,7 +147,7 @@ abstract class BackController extends ApplicationComponent
 	public function setViewFile(string $viewFile): void
 	{
 		if(empty($viewFile)) {
-			throw new \ValueError("La vue ne peut pas être une chaine de caractère vide");
+			throw new ValueError("La vue ne peut pas être une chaine de caractère vide");
 		}
 		
 		$this->viewFile = $viewFile;
@@ -165,7 +166,7 @@ abstract class BackController extends ApplicationComponent
 		$method = "execute" . ucfirst($this->method);
 		
 		if(!is_callable(array($this, $method))) {
-			throw new \RuntimeException("La méthode $this->method n'est pas définie sur ce controller");
+			throw new RuntimeException("La méthode $this->method n'est pas définie sur ce controller");
 		}
 		
 		$this->$method($this->app->httpRequest);

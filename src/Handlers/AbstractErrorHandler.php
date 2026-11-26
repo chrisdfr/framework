@@ -7,6 +7,8 @@
  * Classe de base pour les gestionnaires d'erreurs
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Handlers;
 
 use ChrisDfr\Framework\Application;
@@ -57,14 +59,14 @@ abstract class AbstractErrorHandler extends ApplicationComponent
         $view = new View($this->app);
 
         if($this->displayErrors()) {
-            $view->setViewFile("detectedError");
+            $view->viewFile = "detectedError";
             $view->setData('error', $exception);
         }
         else {
-            $view->setViewFile("unknownError");
+            $view->viewFile = "unknownError";
         }
 
-        $this->app->httpResponse->setView($view);
+        $this->app->httpResponse->view = $view;
         $this->app->httpResponse->render();
     }
     
