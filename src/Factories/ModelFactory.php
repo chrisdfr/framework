@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Factories;
 
-use ChrisDfr\Framework\Exceptions\FactoryErrorException;
-use ChrisDfr\Framework\Exceptions\NoConnectionException;
+use ChrisDfr\Framework\Exceptions\FactoryError;
+use ChrisDfr\Framework\Exceptions\NoDatabaseConnection;
 use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
+use ValueError;
 
 class ModelFactory
 {
@@ -44,25 +45,27 @@ class ModelFactory
 	 * 
 	 * @return mixed
 	 * 
-	 * @throws NoConnectionException
+	 * @throws NoDatabaseConnection
+	 * 
+	 * @throws FactoryError
 	 * 
 	 * @throws ValueError
 	 */
 	public function create(string $model): mixed
 	{
 		if(is_null($this->dao)) {
-			throw new NoConnectionException("Aucune connexion avec une base de données.");
+			throw new NoDatabaseConnection("Aucune connexion avec une base de données.");
 		}
 
 		if(empty($model)) {
-			throw new \ValueError('Le modèle ne peut pas être une chaine de caractère vide.');
+			throw new ValueError('Le modèle ne peut pas être une chaine de caractère vide.');
 		}
 		
 		if(!isset($this->factories[$model])) {
 			$factory = "Lib\Models\\" . $model . "Model" .  $this->api->value;
 		
 			if(!class_exists($factory)) {
-				throw new FactoryErrorException("La classe usine $factory n'a pas peu être trouvée.");
+				throw new FactoryError("La classe usine $factory n'a pas peu être trouvée.");
 			}
 			
 			$this->factories[$model] = new $factory($this->dao);

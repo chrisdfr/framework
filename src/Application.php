@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework;
 
-use ChrisDfr\Framework\Exceptions\InvalidRouteException;
+use ChrisDfr\Framework\Exceptions\InvalidRoute;
 use ChrisDfr\Framework\Handlers\Enums\State;
 use ChrisDfr\Framework\Handlers\Err;
 use ChrisDfr\Framework\Router\Router;
@@ -153,7 +153,7 @@ abstract class Application
 		try {
 			$matchedRoute = Router::getRoute($this->httpRequest->requestURI());
 		}
-		catch (InvalidRouteException $e) {
+		catch (InvalidRoute $e) {
 			$this->httpResponse->redirect404();
 		}
 		

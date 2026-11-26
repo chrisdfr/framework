@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Router;
 
-use ChrisDfr\Framework\Exceptions\InvalidRouteException;
+use ChrisDfr\Framework\Exceptions\InvalidRoute;
 
 class Router
 {
@@ -25,7 +25,7 @@ class Router
      * 
      * @return Route
      * 
-     * @throws InvalidRouteException
+     * @throws InvalidRoute
      */
     public static function getRoute(string $url): Route
     {
@@ -48,7 +48,7 @@ class Router
 			}
 		}
 		
-		throw new InvalidRouteException("Aucune route ne correspond cette url. ($url)");
+		throw new InvalidRoute("Aucune route ne correspond cette url. ($url)");
     }
 
     /**

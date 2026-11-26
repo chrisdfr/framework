@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace ChrisDfr\Framework\Factories;
 
 use ChrisDfr\Framework\Entities\Entity;
-use ChrisDfr\Framework\Exceptions\EntityErrorException;
+use ChrisDfr\Framework\Exceptions\EntityError;
 
 class EntityFactory
 {
@@ -21,6 +21,8 @@ class EntityFactory
      * @param string $entity
      * 
      * @param array $datas
+     * 
+     * @throws EntityError
      * 
      * @return Entity
      */
@@ -33,7 +35,7 @@ class EntityFactory
         $entity = "Lib\Entities\\" . $entity;
 
         if(!class_exists($entity)) {
-            throw new EntityErrorException("L'entité $entity n'a pas peu être trouvée.");
+            throw new EntityError("Entité inexistante:  $entity");
         }
         
         return new $entity($datas);

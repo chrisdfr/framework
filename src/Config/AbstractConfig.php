@@ -14,9 +14,9 @@ namespace ChrisDfr\Framework\Config;
 use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Exceptions\InvalidJSON;
-use SplFileObject;
-
 use Deprecated;
+use RuntimeException;
+use SplFileObject;
 
 abstract class AbstractConfig extends ApplicationComponent
 {
@@ -126,10 +126,10 @@ abstract class AbstractConfig extends ApplicationComponent
 	public static function write(): int|false
 	{
         if(empty(self::$vars[static::class])) {
-            throw new \RuntimeException("Impossible d'écrire un tableau de paramètres vide!");
+            throw new RuntimeException("Impossible d'écrire un tableau de paramètres vide!");
         }
 
-		$file = new \SplFileObject(self::$file[static::class], "w");
+		$file = new SplFileObject(self::$file[static::class], "w");
 		//return $file->fwrite(json_encode(self::$vars[static::class], JSON_PRETTY_PRINT));
         return $file->fwrite(json_encode(static::$vars, JSON_PRETTY_PRINT));
 	}

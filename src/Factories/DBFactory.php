@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Factories;
 
-use ChrisDfr\Framework\Exceptions\FactoryErrorException;
+use ChrisDfr\Framework\Exceptions\FactoryError;
 use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
 
 class DBFactory
 {
     // API utilisée pour l'accès à la base de données
-    protected DatabaseAPI $api;
+    public protected(set) DatabaseAPI $api;
     // Nom de la base de données
     protected string $dbname;
     // Nom d'utilisateur pour la connexion à la base de données
@@ -50,6 +50,8 @@ class DBFactory
     /**
      * Retourne l'instance de la base de données en fonction de l'api utilisée
      * 
+     * @throws FactoryError
+     * 
      * @return mixed
      */
     public function get(): mixed
@@ -62,7 +64,7 @@ class DBFactory
             $factory = "ChrisDfr\Framework\\Database\\" . $this->api->value . "Factory";
 
             if(!class_exists($factory)) {
-                throw new FactoryErrorException("La classe usine $factory n'a pas peu être trouvée.");
+                throw new FactoryError("La classe usine $factory n'a pas peu être trouvée.");
             }
             
             $this->dbInstance = $factory::getInstance($this->dbname, $this->username, $this->password);
