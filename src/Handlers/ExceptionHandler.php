@@ -24,7 +24,7 @@ abstract class ExceptionHandler extends ApplicationComponent
                 throw new ValueError("Le nom du fichier de lon ne peut pas être une chaine de caractère vide");
             }
 
-            $this->filename = $this->app->rootDir. $value;
+            $this->filename = $value;
         }
     }
 
