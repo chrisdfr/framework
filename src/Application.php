@@ -13,7 +13,7 @@ namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\Exceptions\InvalidRoute;
 use ChrisDfr\Framework\Handlers\Enums\State;
-use ChrisDfr\Framework\Handlers\Err;
+use ChrisDfr\Framework\Handlers\DisplayErrors;
 use ChrisDfr\Framework\Router\Router;
 use ChrisDfr\Framework\User\User;
 use Deprecated;
@@ -47,8 +47,8 @@ abstract class Application
 		$this->httpRequest = new HTTPRequest($this);
 		$this->httpResponse = new HTTPResponse($this);
 		$this->user = new User($this);
-		Err::displayErrors(State::Off);
-		Err::logErrors(State::On);
+		DisplayErrors::displayErrors(State::Off);
+		DisplayErrors::logErrors(State::On);
 	
 		//$classname = get_called_class();
 		//$this->nameSpace = substr($classname, 0, strrpos($classname, '\\'));
