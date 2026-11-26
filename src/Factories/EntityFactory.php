@@ -7,6 +7,8 @@
  * Créateur pour les entités
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Factories;
 
 use ChrisDfr\Framework\Entities\Entity;

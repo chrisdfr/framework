@@ -7,6 +7,8 @@
  * Interface pour les classes de connexion à une base de données
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Database\Interfaces;
 
 interface CreateInstance

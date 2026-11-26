@@ -7,6 +7,8 @@
  * Gére la connexion avec la base de données en utilisant PDO
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Database;
 
 use ChrisDfr\Framework\Database\Interfaces\CreateInstance;

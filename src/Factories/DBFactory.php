@@ -7,6 +7,8 @@
  * Retourne une instance de base de données en fonctions d'une api
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Factories;
 
 use ChrisDfr\Framework\Exceptions\FactoryErrorException;

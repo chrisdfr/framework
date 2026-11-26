@@ -7,6 +7,8 @@
  * Gère les liens de l'application
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Config;
 
 use ChrisDfr\Framework\Application;

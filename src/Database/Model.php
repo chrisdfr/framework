@@ -7,6 +7,8 @@
  * Classe de base pour tous les modèles de l'application
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Database;
 
 abstract class Model

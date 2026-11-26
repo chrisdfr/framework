@@ -7,6 +7,8 @@
  * Classe modélidant un utilisateur
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\User;
 
 use ChrisDfr\Framework\Application;

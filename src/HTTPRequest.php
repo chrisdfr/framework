@@ -7,6 +7,8 @@
  * Classe modélidant une requête html
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework;
 
 class HTTPRequest extends ApplicationComponent

@@ -7,6 +7,8 @@
  * Crée le manageur demandé.
  */
 
+declare(strict_types=1);
+
 namespace ChrisDfr\Framework\Factories;
 
 use ChrisDfr\Framework\Exceptions\FactoryErrorException;
