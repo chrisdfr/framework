@@ -27,7 +27,7 @@ class View extends ApplicationComponent
 	public string $viewFile {
 		set {
 			if(empty($value)) {
-				throw new ValueError("La vue spécifiée est invalide");
+				throw new ValueError("La vue ne peut pas être une chaine de caractère vide");
 			}
 		
 			$this->viewFile = $value;
@@ -98,14 +98,14 @@ class View extends ApplicationComponent
 	{
 		if(is_array($data)) {
 			if(empty($data)) {
-				throw new ValueError("Le tableau des variables ne doit pas être nul");
+				throw new ValueError("Le tableau des variables ne peut pas être vide");
 			}
 			
 			$this->data = array_merge($this->data, $data);
 		}
 		else {
 			if(empty($data)) {
-				throw new ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
+				throw new ValueError('Le nom de la variable ne peut pas être une chaine de caractères vide');
 			}
 			
 			$this->data[$data] = $value;
@@ -150,7 +150,7 @@ class View extends ApplicationComponent
 		}
 		
 		if(!$fileExists) {
-			throw new RuntimeException("La vue spécifiée n'existe pas.");
+			throw new RuntimeException("Vue spécifiée inexistante: " . $this->viewFile . $this->ext);
 		}
 		
 		$this->data['user'] = $this->app->user;
