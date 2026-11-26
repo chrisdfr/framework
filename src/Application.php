@@ -11,13 +11,9 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework;
 
-use ChrisDfr\Framework\Config\Config;
-use ChrisDfr\Framework\Config\Link;
-use ChrisDfr\Framework\Config\Enums\AreaConfig;
 use ChrisDfr\Framework\Exceptions\InvalidRouteException;
-use ChrisDfr\Framework\Factories\DBFactory;
-use ChrisDfr\Framework\Factories\Enums\DatabaseAPI;
-use ChrisDfr\Framework\Handlers\ErrorHandler;
+use ChrisDfr\Framework\Handlers\Enums\State;
+use ChrisDfr\Framework\Handlers\Err;
 use ChrisDfr\Framework\Router\Router;
 use ChrisDfr\Framework\User\User;
 use Deprecated;
@@ -28,8 +24,10 @@ abstract class Application
 	public protected(set) string $rootDir;
 	// Dossier des fichiers sources de l'application
 	public protected(set) string $appDir;
+	
 	// Namespace de l'application où l'on se trouve
-	public protected(set) string $nameSpace;
+	public protected(set) string $nameSpace; // *** Deprecated ***
+	
 	// Objet représentant une requête html
 	public protected(set) HTTPRequest $httpRequest;
 	// Objet représentant une réponce html
@@ -37,29 +35,26 @@ abstract class Application
 	// Objet représentant l'utilisateur
 	public protected(set) User $user;
 	// Factory de la base de données
-	public protected(set) mixed $dbFactory;
+	public protected(set) mixed $dbFactory = null;
 	
 	/**
 	 * Constructeur
 	 */
-	public function __construct()
+	public function __construct(string $rootDir, string $appDir)
 	{
-		$classname = get_called_class();
-		$this->rootDir = dirname($_SERVER['DOCUMENT_ROOT']);
-		$this->nameSpace = substr($classname, 0, strrpos($classname, '\\'));
-		$this->appDir = $this->rootDir . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, "/src/" . $this->nameSpace);
+		$this->rootDir = $rootDir;
+		$this->appDir = $appDir;
 		$this->httpRequest = new HTTPRequest($this);
 		$this->httpResponse = new HTTPResponse($this);
 		$this->user = new User($this);
+		Err::displayErrors(State::Off);
+		Err::logErrors(State::On);
+	
+		//$classname = get_called_class();
+		//$this->nameSpace = substr($classname, 0, strrpos($classname, '\\'));
 
 		//Config::init($this);
 		//Link::init($this);
-
-		$configFile = $this->rootDir . str_replace('/', DIRECTORY_SEPARATOR, "/config/conf.json");
-		$linkFile = $this->rootDir . str_replace('/', DIRECTORY_SEPARATOR, "/config/link.json");
-
-		Config::load($configFile);
-		Link::load($linkFile);
 		
 		/*
 		$this->dbFactory = new DBFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')),
@@ -67,11 +62,6 @@ abstract class Application
 															Config::get(AreaConfig::Database, 'username'),
 															Config::get(AreaConfig::Database, 'password'));
 		*/
-		$this->dbFactory = new DBFactory(DatabaseAPI::from(Config::$vars['database']['api']),
-															Config::$vars['database']['dbname'], 
-															Config::$vars['database']['username'],
-															Config::$vars['database']['password']);
-		ErrorHandler::init($this);
 	}
 	
 	/**
@@ -156,7 +146,7 @@ abstract class Application
 	 * 
 	 * @return BackController
 	 */
-	public function getController(): BackController
+	public function getController(string $ns): BackController
 	{
 		require_once $this->appDir . str_replace("/", DIRECTORY_SEPARATOR, "/routes/routes.php");
 
@@ -168,7 +158,7 @@ abstract class Application
 		}
 		
 		$_GET = array_merge($_GET, $matchedRoute->vars);
-		$controllerClass = $this->nameSpace . "\\Controllers\\" . $matchedRoute->controller . "\\" . $matchedRoute->controller . "Controller";
+		$controllerClass = $ns . "\\Controllers\\" . $matchedRoute->controller . "\\" . $matchedRoute->controller . "Controller";
 		
 		return new $controllerClass($this, $matchedRoute->controller, $matchedRoute->method);
 	}
