@@ -173,15 +173,9 @@ class User extends ApplicationComponent
 	 * [Optionnel]
 	 * Si true, l'utilisateur s'est authentifié. False si ce n'est pas le cas.
 	 * @return void
-	 * 
-	 * @throws InvalidArgumentException
 	 */
 	public function setAuthenticated(bool $value = true): void
-	{
-		if(!is_bool($value)) {
-			throw new \InvalidArgumentException("La valeur spécifiée à la méthode User::setAuthenticated() doit être un boolean");
-		}
-		
+	{	
 		$_SESSION['isAuthenticated'] = $value;
 	}
 	
