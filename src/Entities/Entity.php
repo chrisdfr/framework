@@ -7,8 +7,6 @@
  * Classe de base pour toutes les entités.
  */
 
-declare(strict_types=1);
-
 namespace ChrisDfr\Framework\Entities;
 
 use ChrisDfr\Framework\Entities\Traits\Hydrator;

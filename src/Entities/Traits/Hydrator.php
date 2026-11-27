@@ -7,8 +7,6 @@
  * Permet d'initialiser les différents attributs d'un objet
  */
 
-declare(strict_types=1);
-
 namespace ChrisDfr\Framework\Entities\Traits;
 
 use PropertyHookType;
