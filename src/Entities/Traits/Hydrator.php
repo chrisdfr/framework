@@ -25,8 +25,9 @@ trait Hydrator
 	 */
 	public function hydrate(array $data): void
 	{
+		$rClass = new ReflectionClass(static::class);
+		
 		foreach($data as $key => $value) {
-			$rClass = new ReflectionClass(__CLASS__);
 			$rProp = $rClass->getProperty($key);
 
 			if($rProp->hasHook(PropertyHookType::Set)) {
