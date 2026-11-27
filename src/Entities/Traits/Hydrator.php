@@ -27,7 +27,7 @@ trait Hydrator
 	{
 		foreach($data as $key => $value) {
 			$rClass = new ReflectionClass(__CLASS__);
-			$rProp = $rClass->getProperty('nom');
+			$rProp = $rClass->getProperty($key);
 
 			if($rProp->hasHook(PropertyHookType::Set)) {
 				$this->$key = $value;
