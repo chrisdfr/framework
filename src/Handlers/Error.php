@@ -1,18 +1,63 @@
 <?php
 
 /**
- * DisplayErrors.php
+ * AbstractErrorHandler.php
  * @Auteur: Christophe Dufour
+ * 
+ * Classe de base pour les gestionnaires d'erreurs
  */
 
 declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Handlers;
 
+use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Handlers\Enums\State;
+use RuntimeException;
+use Throwable;
+use ValueError;
 
-class DisplayErrors
+abstract class Error extends ApplicationComponent
 {
+    /**
+     * La vue à afficher en cas d'erreur
+     */
+    public public(set) string $view {
+        set {
+            if(empty($value)) {
+                throw new ValueError("La vue ne peut pas être une chaine de caractère vide");
+            }
+
+            $this->view = $value;
+        }
+    }
+
+    /**
+     * Le nom du fichier où il faut enregistrer les log
+     */
+    public string|null $filename = null {
+        set {
+            if(empty($value)) {
+                throw new ValueError("Le nom du fichier de log ne peut pas être une chaine de caractère vide");
+            }
+            
+            $fp = @fopen($value, "w");
+            
+            if(!$fp) {
+                throw new RuntimeException("Impossible d'accèder au fichier de log (" . basename($value) . "): autorisation refusée");
+            }
+
+            fclose($fp);
+            
+            if(stat($value)['gid'] == 33) {
+                chmod($value, 0660);
+                chgrp($value, "www");
+            }
+
+            $this->filename = $value;
+        }
+    }
+
     /**
      * Active, désactive ou retourne l'état de l'affichage des messages d'erreus de PHP
      * 
@@ -20,7 +65,7 @@ class DisplayErrors
      * [optionnel]
      * @return string|false
      */
-    public static function displayErrors(State|null $state = null): string|false
+    public function displayErrors(State|null $state = null): string|false
     {
         if(is_null($state)) {
             return ini_get("display_errors");
@@ -87,9 +132,34 @@ class DisplayErrors
      * [optionnel] Le niveau d'erreur
      * @return ?callable
      */
+    /*
     public static function setErrorHandler(?callable $callback, int $error_levels = E_ALL): ?callable
     {
         return set_error_handler($callback, $error_levels);
     }
+    */
+
+    /**
+     * Définit une fonction pour la gestion d'exceptions 
+     * 
+     * @return ?callable
+     */
+    public function setExceptionHandler(): ?callable
+    {
+        if(!isset($this->view)) {
+            throw new RuntimeException("Vous devez spécifier une vue à afficher en cas d'erreur");
+        }
+
+        return set_exception_handler([$this, 'exceptionHandler']);
+    }
+
+    /**
+     * Intercepte les exeptions lancées
+     * 
+     * @param Throwable $ex
+     * 
+     * @return void
+     */
+    abstract public function exceptionHandler(Throwable $ex): void;
 
 }
