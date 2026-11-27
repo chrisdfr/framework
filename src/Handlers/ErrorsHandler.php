@@ -16,7 +16,7 @@ use DateTime;
 use SplFileObject;
 use Throwable;
 
-class ErrosHandler extends Error
+class ErrorsHandler extends Error
 {
     /**
      * Intercepte les exeptions lancées

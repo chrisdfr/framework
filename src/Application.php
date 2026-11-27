@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\Exceptions\InvalidRoute;
-use ChrisDfr\Framework\Handlers\ErrorHandler;
-use ChrisDfr\Framework\Handlers\ExceptionHandler;
+use ChrisDfr\Framework\Handlers\Error;
+use ChrisDfr\Framework\Handlers\ErrorsHandler;
 use ChrisDfr\Framework\Router\Router;
 use ChrisDfr\Framework\User\User;
 use Deprecated;
@@ -35,7 +35,7 @@ abstract class Application
 	// Objet représentant l'utilisateur
 	public protected(set) User $user;
 	// Objet pour l'interception des exceptions
-	public protected(set) ExceptionHandler $errorHandler;
+	public protected(set) Error $errorsHandler;
 	// Factory de la base de données
 	public protected(set) mixed $dbFactory = null;
 	
@@ -49,7 +49,7 @@ abstract class Application
 		$this->httpRequest = new HTTPRequest($this);
 		$this->httpResponse = new HTTPResponse($this);
 		$this->user = new User($this);
-		$this->errorHandler = new ErrorHandler($this);
+		$this->errorsHandler = new ErrorsHandler($this);
 	
 		//$classname = get_called_class();
 		//$this->nameSpace = substr($classname, 0, strrpos($classname, '\\'));
