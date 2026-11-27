@@ -23,9 +23,6 @@ abstract class AbstractConfig extends ApplicationComponent
     // Tableau des fichiers de configuration
     protected static array $file = [];
 
-    // Tableau des paramètres de configuration
-    // public protected(set) static array $vars = [];
-
     /**
      * Initialisation
      * 
@@ -42,7 +39,7 @@ abstract class AbstractConfig extends ApplicationComponent
     #[Deprecated("Méthode vouée à disparaître")]
     public static function vars(): array|null
     {
-        return !empty(self::$vars[static::class]) ? self::$vars[static::class] : null;
+        return !empty(self::$setting[static::class]) ? self::$setting[static::class] : null;
     }
 
     /**
@@ -53,7 +50,7 @@ abstract class AbstractConfig extends ApplicationComponent
     #[Deprecated("Méthode vouée à disparaître")]
     public function setVars(array $vars): void
     {
-        self::$vars[static::class] = $vars;
+        self::$setting[static::class] = $vars;
     }
 
     /**
@@ -80,8 +77,8 @@ abstract class AbstractConfig extends ApplicationComponent
             throw new InvalidJSON("Erreur de decodage JSON: " . self::jsonErrorMsg());
         }
 
-        //self::$vars[static::class] = json_decode($content, true);
-        static::$vars = $json;
+        //self::$setting[static::class] = json_decode($content, true);
+        static::$setting = $json;
 	}
 
     /**
@@ -125,13 +122,13 @@ abstract class AbstractConfig extends ApplicationComponent
 	 */
 	public static function write(): int|false
 	{
-        if(empty(self::$vars[static::class])) {
+        if(empty(self::$setting[static::class])) {
             throw new RuntimeException("Impossible d'écrire un tableau de paramètres vide!");
         }
 
 		$file = new SplFileObject(self::$file[static::class], "w");
-		//return $file->fwrite(json_encode(self::$vars[static::class], JSON_PRETTY_PRINT));
-        return $file->fwrite(json_encode(static::$vars, JSON_PRETTY_PRINT));
+		//return $file->fwrite(json_encode(self::$setting[static::class], JSON_PRETTY_PRINT));
+        return $file->fwrite(json_encode(static::$setting, JSON_PRETTY_PRINT));
 	}
     
 }

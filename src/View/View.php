@@ -156,7 +156,7 @@ class View extends ApplicationComponent
 		$this->data['user'] = $this->app->user;
 
 		//if($links = Link::vars()) {
-		if($links = Link::$vars) {
+		if($links = Link::$setting) {
 			$this->setData($links);
 		}
 		

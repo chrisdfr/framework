@@ -20,7 +20,7 @@ class Link extends AbstractConfig
 {
     const FILENAME = "/config/link.json";
 
-    public protected(set) static array $vars;
+    public protected(set) static array $setting;
 
     /**
      * Initialisation
@@ -45,8 +45,8 @@ class Link extends AbstractConfig
      */
     public static function set(string $key, mixed $value): void
     {
-        //self::$vars[static::class][$key] = $value;
-        self::$vars[$key] = $value;
+        //self::$setting[static::class][$key] = $value;
+        self::$setting[$key] = $value;
     }
 
     /**
@@ -60,7 +60,7 @@ class Link extends AbstractConfig
     #[Deprecated("Méthode vouée à disparaître")]
     public static function exists(string $key): bool
     {
-        return array_key_exists($key, self::$vars[static::class]);
+        return array_key_exists($key, self::$setting[static::class]);
     }
 
     /**
@@ -75,11 +75,11 @@ class Link extends AbstractConfig
     #[Deprecated("Méthode vouée à disparaître")]
 	public static function get(string $key): mixed
 	{
-		if(!array_key_exists($key, self::$vars[static::class])) {
+		if(!array_key_exists($key, self::$setting[static::class])) {
             throw new BadConfigParamException("Paramètre de configuration inexistant.  [$key]");
 		}
 		
-        return self::$vars[static::class][$key];
+        return self::$setting[static::class][$key];
 	}
 
 }
