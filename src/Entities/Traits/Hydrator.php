@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Entities\Traits;
 
+use PropertyHookType;
+use ReflectionClass;
+
 trait Hydrator
 {	
 	/**
@@ -23,10 +26,18 @@ trait Hydrator
 	public function hydrate(array $data): void
 	{
 		foreach($data as $key => $value) {
-			$method = "set" . ucfirst($key);
+			$rClass = new ReflectionClass(__CLASS__);
+			$rProp = $rClass->getProperty('nom');
+
+			if($rProp->hasHook(PropertyHookType::Set)) {
+				$this->$key = $value;
+			}
+			else {
+				$method = "set" . ucfirst($key);
 			
-			if(is_callable(array($this, $method))) {
-				$this->$method($value);
+				if(is_callable(array($this, $method))) {
+					$this->$method($value);
+				}
 			}
 		}
 	}
