@@ -61,15 +61,16 @@ abstract class AbstractConfig extends ApplicationComponent
 	 * 
      * @param string $filename
      * 
+     * @throws RuntimeException
+     * 
      * @throws InvalidJSON
      * 
-	 * @return bool
-     * Retourne true en cas de succès, sinon false
+	 * @return void
      */
-	public static function load(string $filename): bool
+	public static function load(string $filename): void
 	{
         if(!is_readable($filename)) {
-            return false;
+             throw new RuntimeException("Fichier de configuration introuvable: " . basename($filename));
         }
 
         $file = new SplFileObject($filename);
@@ -81,7 +82,6 @@ abstract class AbstractConfig extends ApplicationComponent
 
         //self::$vars[static::class] = json_decode($content, true);
         static::$vars = $json;
-        return true;
 	}
 
     /**
