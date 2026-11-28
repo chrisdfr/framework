@@ -11,29 +11,10 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Config;
 
-use ChrisDfr\Framework\Application;
-use ChrisDfr\Framework\Config\Enums\AreaConfig;
-use ChrisDfr\Framework\Exceptions\BadConfigParamException;
-
-use Deprecated;
-
 class Config extends AbstractConfig
 {
-    const FILENAME = "/config/conf.json";
-    
+    // Tableau des paramètres
     public protected(set) static array $setting;
-    
-    /**
-     * Initialisation
-     * 
-     * @return void
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function init(Application $app): void
-    {
-        self::$file[static::class] = $app->rootDir . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
-        self::load(self::$file[static::class]);
-    }
 
     /**
 	 * Modifie la valeur d'une variable dans le tableau des configurations si celle-ci existe.
@@ -42,87 +23,12 @@ class Config extends AbstractConfig
      * 
      * @param mixed $value
      * 
-     * @param AreaConfig
-     * 
 	 * @return void
 	 */
-	public static function set(string $key, mixed $value, AreaConfig $index): void
+	public static function set(string $key, mixed $value, string $index): void
 	{
-        //self::$setting[static::class][$index->value][$key] = $value;
-        self::$setting[$index->value][$key] = $value;
+        self::$setting[$index][$key] = $value;
 	}
-
-    /**
-     * Vérifie l'existence d'une variable dans le tableau des paramètres
-     * 
-     * @param string $key
-     * 
-     * @param AreaConfig $index
-     * 
-     * @return bool
-     * Retourne true en cas de succès, sinon false
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function exists(string $key, AreaConfig $index): bool
-    {
-        return array_key_exists($key, self::$setting[static::class][$index->value]);
-    }
-
-    /**
-	 * Retourne la valeur d'un paramètre
-     * 
-     * @param AreaConfig $index
-     * 
-     * @param string $key
-     * [Optionnel]
-     * Si key est vide, le retour sera une section du tableau de configuration, 
-     * sinon c'est la valeur de key qui est retournée
-	 * @return mixed
-     * 
-     * @throws BadConfigParamException
-	 */
-    #[Deprecated("Méthode vouée à disparaître")]
-	public static function get(AreaConfig $index, string $key = ""): mixed
-	{
-        if(empty($key)) {
-            return self::$setting[static::class][$index->value];
-        }
-
-        if(!array_key_exists($key, self::$setting[static::class][$index->value])) {
-            throw new BadConfigParamException("Paramètre de configuration inexistant. [$key]");
-        }
-		
-		return self::$setting[static::class][$index->value][$key];
-	}
-
-    /**
-     * Retourne la valeur d'un paramètre
-     * 
-     * @param string $name
-     * 
-     * @param array $arguments
-     * 
-     * @return mixed
-     * 
-     * @throws BadConfigParamException
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function __callStatic(string $name, array $arguments): mixed
-    {
-        if(!AreaConfig::tryFrom($name)) {
-            throw new BadConfigParamException("Paramètre de configuration inexistant. [$name]");
-        }
-
-        if(empty($arguments)) {
-            throw new BadConfigParamException("Vous devez spécifier un argument pour la méthode [$name].");
-        }
-
-        if(!array_key_exists($arguments[0], self::$setting[static::class][$name])) {
-            throw new BadConfigParamException("Paramètre de configuration inexistant. [$name][$arguments[0]]");
-        }
-
-        return self::$setting[static::class][$name][$arguments[0]];
-    }
 
     /**
      * Crée la structure du tableau des paramètres
@@ -142,5 +48,4 @@ class Config extends AbstractConfig
             'frontend' => array()
         );
     }
-
 }

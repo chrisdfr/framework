@@ -11,28 +11,10 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Config;
 
-use ChrisDfr\Framework\Application;
-use ChrisDfr\Framework\Exceptions\BadConfigParamException;
-
-use Deprecated;
-
 class Link extends AbstractConfig
 {
-    const FILENAME = "/config/link.json";
-
+    // Tableau des paramètres
     public protected(set) static array $setting;
-
-    /**
-     * Initialisation
-     * 
-     * @return void
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function init(Application $app): void
-    {
-        self::$file[static::class] = $app->rootDir . str_replace('/', DIRECTORY_SEPARATOR, self::FILENAME);
-        !self::load(self::$file[static::class]);
-    }
 
     /**
      * Ajoute ou modifie une variable du tableau des paramètres
@@ -45,41 +27,6 @@ class Link extends AbstractConfig
      */
     public static function set(string $key, mixed $value): void
     {
-        //self::$setting[static::class][$key] = $value;
         self::$setting[$key] = $value;
     }
-
-    /**
-     * Vérifie l'existence d'une variable dans le tableau des paramètres
-     * 
-     * @param string $key
-     * 
-     * @return bool
-     * Retourne true si la variable existe, sinon false
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function exists(string $key): bool
-    {
-        return array_key_exists($key, self::$setting[static::class]);
-    }
-
-    /**
-	 * Retourne la valeur d'un paramètre
-	 * 
-	 * @param string $key
-     * 
-	 * @return mixed
-     * 
-     * @throws BadConfigParamExecption
-	 */
-    #[Deprecated("Méthode vouée à disparaître")]
-	public static function get(string $key): mixed
-	{
-		if(!array_key_exists($key, self::$setting[static::class])) {
-            throw new BadConfigParamException("Paramètre de configuration inexistant.  [$key]");
-		}
-		
-        return self::$setting[static::class][$key];
-	}
-
 }

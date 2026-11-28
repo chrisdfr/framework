@@ -14,7 +14,6 @@ namespace ChrisDfr\Framework;
 use ChrisDfr\Framework\Factories\EntityFactory;
 use ChrisDfr\Framework\Factories\ModelFactory;
 use ChrisDfr\Framework\View\View;
-use Deprecated;
 use RuntimeException;
 use ValueError;
 
@@ -85,76 +84,7 @@ abstract class BackController extends ApplicationComponent
 		$this->method = $method;
 		$this->viewFile = $method;
 	}
-	
-	/**
-	 * Retourne la valeur de view
-	 * 
-	 * @return View
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$view qui est public en lecture")]
-	public function view(): View
-	{
-		return $this->view;
-	}
-	
-	/**
-	 * Modifie la valeur de controller
-	 * 
-	 * @param string $controller
-	 * 
-	 * @return void
-	 * 
-	 * @throws ValueError
-	 */
-	#[Deprecated("Accédez directement à l'attribut protected \$controller ")]
-	public function setController(string $controller): void
-	{
-		if(empty($controller)) {
-			throw new ValueError("Le controller ne peut pas être une chaine de caractère vide");
-		}
 		
-		$this->controller = $controller;
-	}
-	
-	/**
-	 * Modifie la valeur de method
-	 * 
-	 * @param string $method
-	 * 
-	 * @return void
-	 * 
-	 * @throws ValueError
-	 */
-	#[Deprecated("Accédez directement à l'attribut protected \$method ")]
-	public function setMethod(string $method): void
-	{
-		if(empty($method)) {
-			throw new ValueError("La méthode ne peut pas être une chaine de caractère vide");
-		}
-		
-		$this->method = $method;
-	}
-	
-	/**
-	 * Modifie la valeur de viewFile
-	 * 
-	 * @param string $viewFile
-	 * 
-	 * @return void
-	 * 
-	 * @throws ValueError
-	 */
-	#[Deprecated("Accédez directement à l'attribut protected \$viewFile ")]
-	public function setViewFile(string $viewFile): void
-	{
-		if(empty($viewFile)) {
-			throw new ValueError("La vue ne peut pas être une chaine de caractère vide");
-		}
-		
-		$this->viewFile = $viewFile;
-		$this->view->viewFile = $this->viewFile;
-	}
-	
 	/**
 	 * Exécute la méthode demandée si celle-ci existe
 	 * 
@@ -172,5 +102,4 @@ abstract class BackController extends ApplicationComponent
 		
 		$this->$method($this->app->httpRequest);
 	}
-	
 }

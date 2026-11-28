@@ -12,25 +12,11 @@ declare(strict_types=1);
 namespace ChrisDfr\Framework;
 
 use ChrisDfr\Framework\View\View;
-use Deprecated;
 
 class HTTPResponse extends ApplicationComponent
 {
 	// La vue à afficher
 	public View $view;
-	
-	/**
-	 * Modifie la valeur de $view
-	 * 
-	 * @param View $view
-	 * 
-	 * @return void
-	 */
-	#[Deprecated("Accédez directement à l'attribut protected \$view ")]
-	public function setView(View $view): void
-	{
-		$this->view = $view;
-	}
 
 	/**
 	 * Permet d'ajouter un entête html

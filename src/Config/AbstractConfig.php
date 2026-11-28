@@ -11,47 +11,15 @@ declare(strict_types=1);
 
 namespace ChrisDfr\Framework\Config;
 
-use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Exceptions\InvalidJSON;
-use Deprecated;
 use RuntimeException;
 use SplFileObject;
 
 abstract class AbstractConfig extends ApplicationComponent
 {
-    // Tableau des fichiers de configuration
-    protected static array $file = [];
-
-    /**
-     * Initialisation
-     * 
-     * @return void
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    abstract static function init(Application $app): void;
-
-    /**
-     * Retourne la valeur de vars
-     * 
-     * @return array|null
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public static function vars(): array|null
-    {
-        return !empty(self::$setting[static::class]) ? self::$setting[static::class] : null;
-    }
-
-    /**
-     * Modifie la valeur de vars
-     * 
-     * @return void
-     */
-    #[Deprecated("Méthode vouée à disparaître")]
-    public function setVars(array $vars): void
-    {
-        self::$setting[static::class] = $vars;
-    }
+    // Tableau des nom de fichier de configuration
+    protected static array $filename = [];
 
     /**
      * Lit un fichier de configuration au format json
@@ -70,6 +38,7 @@ abstract class AbstractConfig extends ApplicationComponent
              throw new RuntimeException("Fichier de configuration introuvable: " . basename($filename));
         }
 
+        self::$filename[static::class] = $filename;
         $file = new SplFileObject($filename);
         $content = $file->fread($file->getSize());
 
@@ -77,7 +46,6 @@ abstract class AbstractConfig extends ApplicationComponent
             throw new InvalidJSON("Erreur de decodage JSON: " . self::jsonErrorMsg());
         }
 
-        //self::$setting[static::class] = json_decode($content, true);
         static::$setting = $json;
 	}
 
@@ -122,13 +90,11 @@ abstract class AbstractConfig extends ApplicationComponent
 	 */
 	public static function write(): int|false
 	{
-        if(empty(self::$setting[static::class])) {
+        if(empty(static::$setting[static::class])) {
             throw new RuntimeException("Impossible d'écrire un tableau de paramètres vide!");
         }
 
-		$file = new SplFileObject(self::$file[static::class], "w");
-		//return $file->fwrite(json_encode(self::$setting[static::class], JSON_PRETTY_PRINT));
+		$file = new SplFileObject(self::$filename[static::class], "w");
         return $file->fwrite(json_encode(static::$setting, JSON_PRETTY_PRINT));
 	}
-    
 }

@@ -14,7 +14,6 @@ namespace ChrisDfr\Framework\View;
 use ChrisDfr\Framework\Application;
 use ChrisDfr\Framework\ApplicationComponent;
 use ChrisDfr\Framework\Config\Link;
-use Deprecated;
 use RuntimeException;
 use ValueError;
 
@@ -64,25 +63,6 @@ class View extends ApplicationComponent
 	}
 	
 	/**
-	 * Modifie la valeur de viewFile
-	 * 
-	 * @param string $viewFile
-	 * 
-	 * @return void
-	 * 
-	 * @throws ValueError
-	 */
-	#[Deprecated("Accédez directement à l'attribut public \$viewFile")]
-	public function setViewFile(string $viewFile): void
-	{
-		if(empty($viewFile)) {
-			throw new ValueError("La vue spécifiée est invalide");
-		}
-		
-		$this->viewFile = $viewFile;
-	}
-	
-	/**
 	 * Ajoute une variable de template
 	 * 
 	 * @param array|string $data
@@ -110,25 +90,6 @@ class View extends ApplicationComponent
 			
 			$this->data[$data] = $value;
 		}
-	}
-
-	/**
-	 * Ajoute une variable de template
-	 * 
-	 * @param string $name
-	 * 
-	 * @param mixed $value
-	 * 
-	 * @return void
-	 */
-	#[Deprecated("Méthode vouée à disparaître")]
-	public function __set(string $name, mixed $value): void
-	{
-		if(empty($name)) {
-			throw new ValueError('Le nom de la variable ne doit pas être une chaine de caractères vide');
-		}
-
-		$this->data[$name] = $value;
 	}
 
 	/**
@@ -165,5 +126,4 @@ class View extends ApplicationComponent
 		
 		return $twig->render($this->viewFile . $this->ext, $this->data);
 	}
-	
 }

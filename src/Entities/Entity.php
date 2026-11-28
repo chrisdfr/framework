@@ -11,8 +11,6 @@ namespace ChrisDfr\Framework\Entities;
 
 use ChrisDfr\Framework\Entities\Traits\Hydrator;
 
-use Deprecated;
-
 abstract class Entity
 {
 	// Utilisation du trait Hydrator
@@ -40,43 +38,6 @@ abstract class Entity
 	{
 		if(!empty($data)) {
 			$this->hydrate($data);
-		}
-	}
-	
-	/**
-	 * Retourne la valeur de id
-	 * 
-	 * @return int
-	 */
-	#[Deprecated("Accédez directement à l'attribut public \$id")]
-	public function id(): int
-	{
-		return $this->id;
-	}
-	
-	/**
-	 * Retourne la valeur de errors
-	 * 
-	 * @return array
-	 */
-	#[Deprecated("Accédez directement à l'attribut public \$errors")]
-	public function errors(): array
-	{
-		return $this->errors;
-	}
-	
-	/**
-	 * Modifie la valeur de id
-	 * 
-	 * @param int $value
-	 * 
-	 * @return void
-	 */
-	#[Deprecated("Accédez directement à l'attribut public \$id")]
-	public function setId(int $id): void
-	{
-		if($id > 0) {
-			$this->id = $id;
 		}
 	}
 	
@@ -109,5 +70,4 @@ abstract class Entity
 	 * Retourne true si l'objet est valide, sinon false
 	 */
 	abstract public function isValid(): bool;
-	
 }

@@ -16,7 +16,6 @@ use ChrisDfr\Framework\Handlers\Error;
 use ChrisDfr\Framework\Handlers\ErrorsHandler;
 use ChrisDfr\Framework\Router\Router;
 use ChrisDfr\Framework\User\User;
-use Deprecated;
 
 abstract class Application
 {
@@ -24,10 +23,6 @@ abstract class Application
 	public protected(set) string $rootDir;
 	// Dossier des fichiers sources de l'application
 	public protected(set) string $appDir;
-	
-	// Namespace de l'application où l'on se trouve
-	public protected(set) string $nameSpace; // *** Deprecated ***
-	
 	// Objet représentant une requête html
 	public protected(set) HTTPRequest $httpRequest;
 	// Objet représentant une réponce html
@@ -50,96 +45,6 @@ abstract class Application
 		$this->httpResponse = new HTTPResponse($this);
 		$this->user = new User($this);
 		$this->errorsHandler = new ErrorsHandler($this);
-	
-		//$classname = get_called_class();
-		//$this->nameSpace = substr($classname, 0, strrpos($classname, '\\'));
-
-		//Config::init($this);
-		//Link::init($this);
-		
-		/*
-		$this->dbFactory = new DBFactory(DatabaseAPI::from(Config::get(AreaConfig::Database, 'api')),
-															Config::get(AreaConfig::Database, 'dbname'), 
-															Config::get(AreaConfig::Database, 'username'),
-															Config::get(AreaConfig::Database, 'password'));
-		*/
-	}
-	
-	/**
-	 * Retourne la valeur de rootDir
-	 * 
-	 * @return string
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$rootDir qui est public en lecture")]
-	public function rootDir(): string
-	{
-		return $this->rootDir;
-	}
-
-	/**
-	 * Retourne la valeur de appDir
-	 * 
-	 * @return string
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$appDir qui est public en lecture")]
-	public function appDir(): string
-	{
-		return $this->appDir;
-	}
-
-	/**
-	 * Retourne la valeur de nameSpace
-	 * 
-	 * @return string
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$nameSpace qui est public en lecture")]
-	public function nameSpace(): string
-	{
-		return $this->nameSpace;
-	}
-
-	/**
-	 * Retourne la valeur de httpRequest
-	 * 
-	 * @return HTTPRequest
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$httpRequest qui est public en lecture")]
-	public function httpRequest(): HTTPRequest
-	{
-		return $this->httpRequest;
-	}
-	
-	/**
-	 * Retourne la valeur de httpResponse
-	 * 
-	 * @return HTTPResponse
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$httpResponse qui est public en lecture")]
-	public function httpResponse(): HTTPResponse
-	{
-		return $this->httpResponse;
-	}
-	
-	/**
-	 * Retourne la valeur de user
-	 * 
-	 * @return User
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$user qui est public en lecture")]
-	public function user(): User
-	{
-		return $this->user;
-	}
-
-	/**
-	 * Retourne la valeur de dbFactory
-	 * 
-	 * @return mixed
-	 */
-	#[Deprecated("Accédez directement à l'attribut \$dbFactory qui est public en lecture")]
-	public function dbFactory(): mixed
-	{
-		return $this->dbFactory;
 	}
 
 	/**
@@ -169,6 +74,5 @@ abstract class Application
 	 * 
 	 * @return void
 	 */
-	abstract public function run(): void;
-	
+	abstract public function run(): void;	
 }
