@@ -18,9 +18,6 @@ use SplFileObject;
 
 abstract class AbstractConfig extends ApplicationComponent
 {
-    // Tableau des nom de fichier de configuration
-    protected static array $filename = [];
-
     /**
      * Lit un fichier de configuration au format json
 	 * 
@@ -38,7 +35,6 @@ abstract class AbstractConfig extends ApplicationComponent
              throw new RuntimeException("Fichier de configuration introuvable: " . basename($filename));
         }
 
-        self::$filename[static::class] = $filename;
         $file = new SplFileObject($filename);
         $content = $file->fread($file->getSize());
 
@@ -80,21 +76,4 @@ abstract class AbstractConfig extends ApplicationComponent
 
         return $msg;
     }
-
-    /**
-	 * Ecrit un fichier de paramètres au format json
-	 * 
-	 * @return int|false
-     * Retourne le nombre d'octets écrits, ou false si une erreur survient.
-     * @throws RuntimeException
-	 */
-	public static function write(): int|false
-	{
-        if(empty(static::$setting[static::class])) {
-            throw new RuntimeException("Impossible d'écrire un tableau de paramètres vide!");
-        }
-
-		$file = new SplFileObject(self::$filename[static::class], "w");
-        return $file->fwrite(json_encode(static::$setting, JSON_PRETTY_PRINT));
-	}
 }
